@@ -5,7 +5,7 @@ export const NCIS_Selector = (props) => {
   return (
     <select
       type="text"
-      className="form-control shadow"
+      className="form-control selectpicker shadow"
       placeholder={placeHolder}
       style={{ borderRadius: 20, background: "#ffffff", border: "none" }}
     >

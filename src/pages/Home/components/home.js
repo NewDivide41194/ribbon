@@ -35,9 +35,7 @@ export const Home = () => {
       <div className="col-11 p-0 img-fluid">
         <img src={RibbonBottle} className="img-fluid" />
       </div>
-      <div className="col-1 p-0">
         <Counter />
-      </div>
       <div className="row">
         <Highlights />
 

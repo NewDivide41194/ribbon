@@ -7,14 +7,14 @@ export const PledgeContainer = () => {
   return (
     <div className="container">
       <div className="row">
-      <PledgeCard />
+        <div className="col-4">
+          <PledgeCard />
+        </div>
 
-          <div className="col-8">
-            <PledgeProgress />  
-            <PledgeForm />
-          </div>
-        
-
+        <div className="col-8 py-4">
+          <PledgeProgress />
+          <PledgeForm />
+        </div>
       </div>
     </div>
   );

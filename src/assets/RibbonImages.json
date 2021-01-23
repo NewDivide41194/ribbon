@@ -1,6 +1,6 @@
 {
   "Ribbons": [
-    { "imgaeUrl": "./assets/images/ribbons/LightViolet.png", "name": "All Cancers" },
+    { "imgaeUrl": "./assets/images/ribbons/lightViolet.png", "name": "All Cancers" },
     { "imgaeUrl":  "./assets/images/ribbons/pink.png", "name": "Breast" },
     { "imgaeUrl":  "./assets/images/ribbons/blueGreen.png", "name": "Cervical" },
     { "imgaeUrl":  "./assets/images/ribbons/darkBlue.png", "name": "Colorectal" },
