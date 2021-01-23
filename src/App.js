@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from 'react'
+import NavBar  from "./app/navBar";
+import { Footer } from "./app/footer";
+
+import { Route, Switch, Redirect,withRouter } from "react-router-dom";
+import Routes from "./routes";
+import ErrorPage from "./pages/Error/errors";
+import HomeContainer from "./pages/Home/container/homeContainer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={HomeContainer} />
+        {
+          Object.keys(Routes.routes).map((v, k) => (
+            <Route
+              key={k}
+              path={`/${v}`}
+              component={Routes.routes[v].component}
+            />
+          ))
+        }
+        {/* <Redirect to="/" /> */}
+
+        <Route
+          path="*"
+          component={() => <ErrorPage ErrorInfo={"Page Not Found!"} />}
+        />
+      </Switch>
+      <Footer/>
+    </React.Fragment>
   );
 }
 
