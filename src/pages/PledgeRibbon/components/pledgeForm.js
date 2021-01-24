@@ -6,40 +6,94 @@ import RibbonImages from "../../../assets/RibbonImages.json";
 import { violet } from "../../../assets/colors";
 
 export const PledgeForm = (props) => {
-  const { _handleSelect, menuVisible,_handleRibbonClick } = props;
+  const {
+    _handleSelect,
+    _handleSelectOption,
+    menuVisible,
+    _handleRibbonClick,
+    _handleTextChange,
+    step,
+    _handleReview,
+    _handleConfirm,
+    _handleEdit,
+    recipientName,
+    senderName,
+    message,
+  } = props;
+
   return (
     <div className="py-5">
       <form>
         <div>
-          <strong>Step 1:</strong>
+          <strong>{`Step ${step}:`}</strong>
         </div>
         <label style={{ fontWeight: "bold", fontSize: 25 }}>
-          Choose Your Ribbon and Create Your Message
+          {step === 1
+            ? "Choose Your Ribbon and Create Your Message"
+            : step === 2
+            ? "Review Your Ribbon"
+            : "Share Your Message"}
         </label>
-        <PledgeRibbons _handleSelect={_handleSelect} _handleRibbonClick={_handleRibbonClick} menuVisible={menuVisible}/>
-        <div className="form-group row m-0 justify-content-center py-4">
-          <div className="col-6">
-            <NCIS_TextBox placeHolder={"Add Recipient Name"} />
+        <br />
+        {step === 3 &&
+          "Click Back to edit or select on the following icons to share your message"}
+        {step === 1 && <PledgeRibbons {...props} />}
+        {/* //  _handleSelect={_handleSelect} _handleRibbonClick={_handleRibbonClick} menuVisible={menuVisible} */}
+        {step === 4 ? (
+          <ThankYouCard />
+        ) : step === 3 ? (
+          <ShareForms />
+        ) : (
+          <div className="form-group row m-0 justify-content-center py-4">
+            <div className="col-6">
+              <NCIS_TextBox
+                placeHolder={step === 2 ? recipientName : "Add Recipient Name"}
+                handleTextChange={_handleTextChange}
+                id={"recipient"}
+                disabled={step === 2 && true}
+              />
+            </div>
+            <div className="col-6">
+              <NCIS_TextBox
+                placeHolder={step === 2 ? senderName : "Add Sender Name"}
+                handleTextChange={_handleTextChange}
+                id={"sender"}
+                disabled={step === 2 && true}
+              />
+            </div>
+            <div className="col-12 py-4">
+              <NCIS_Selector
+                placeHolder={message !== "" ? message : "Select Message"}
+                onClick={step != 2 ? _handleSelect : undefined}
+                menuVisible={menuVisible}
+                _handleSelectOption={_handleSelectOption}
+              />
+            </div>
+            {!menuVisible && step === 1 ? (
+              <NCIS_Button text={"Review"} onClick={_handleReview} />
+            ) : step === 2 ? (
+              <React.Fragment>
+                <NCIS_Button
+                  text={"Edit"}
+                  onClick={_handleEdit}
+                  className="mx-2"
+                />
+                <NCIS_Button
+                  text={"Confirm"}
+                  onClick={_handleConfirm}
+                  className="mx-2"
+                />
+              </React.Fragment>
+            ) : null}
           </div>
-          <div className="col-6">
-            <NCIS_TextBox placeHolder={"Add Sender Name"} />
-          </div>
-          <div className="col-12 py-4">
-            <NCIS_Selector
-              placeHolder={"Select Message"}
-              onClick={_handleSelect}
-              menuVisible={menuVisible}
-            />
-          </div>
-          {menuVisible||<NCIS_Button text={"Review"} />}
-        </div>
+        )}
       </form>
     </div>
   );
 };
 
 const PledgeRibbons = (props) => {
-  const {_handleRibbonClick,menuVisible}=props
+  const { _handleRibbonClick, menuVisible } = props;
   const [selected, setSelected] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -60,12 +114,11 @@ const PledgeRibbons = (props) => {
     RibbonDiv(e).style.color = "#ffffff";
     if (selectedId != null) {
       prevRibbonDiv(prevSelectedId).style.background = "none";
-      prevRibbonDiv(prevSelectedId).style.color = "#000000";   
-      _handleRibbonClick(false)   
-
+      prevRibbonDiv(prevSelectedId).style.color = "#000000";
+      _handleRibbonClick(false);
     }
     PopupDiv(e).style.visibility = "hidden";
-    _handleRibbonClick(true)
+    _handleRibbonClick(true);
   };
 
   const _handleHover = (e) => {
@@ -116,6 +169,63 @@ const PledgeRibbons = (props) => {
           </div>
         </div>
       ))}
+    </div>
+  );
+};
+
+const ThankYouCard = () => {
+  return (
+    <div
+      className="bg-light shadow mt-2 w-100 p-5"
+      style={{
+        borderRadius: 25,
+        // position: "absolute",
+        // top: 0,
+        // left: 0,
+        margin: 0,
+      }}
+    >
+      <strong>Thank you for Pledging</strong>
+      <br />
+      {/* <p></p> */}
+      <div className="row justify-content-center">
+        <NCIS_Button
+          text={"Back To Home"}
+          // onClick={_handleEdit}
+          className="mx-2"
+          buttonColor={violet}
+        />
+        <NCIS_Button
+          text={"Pledge Another"}
+          // onClick={_handleConfirm}
+          className="mx-2"
+        />
+      </div>
+    </div>
+  );
+};
+
+const ShareForms = () => {
+  return (
+    <div className="row justify-content-center">
+      <div
+        className="col-12 shadow"
+        style={{ width: 35, height: 35, background: "#ffffff", lineHeight: 1 }}
+      >
+        <i className="fa fa-facebook-f" />
+      </div>
+      <br />
+      <NCIS_Button
+        text={"Back To Home"}
+        // onClick={_handleEdit}
+        className="mx-2"
+        buttonColor={violet}
+      />
+      <NCIS_Button
+        text={"Pledge Another"}
+        // onClick={_handleConfirm}
+        className="mx-2"
+      />
     </div>
   );
 };

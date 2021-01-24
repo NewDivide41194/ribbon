@@ -2,12 +2,12 @@ import React from "react";
 import { orange } from "../assets/colors";
 
 export const NCIS_Button = (props) => {
-    const {text,icon,onClick}=props
+    const {text,icon,onClick,className,buttonColor}=props
   return (
     <button
-      className="btn text-light"
+      className={`btn text-light ${className}`}
       style={{
-        background: orange,
+        background: buttonColor||orange,
         borderRadius: 50,
         fontSize: "14px",
         width: icon?"190px":"170px",

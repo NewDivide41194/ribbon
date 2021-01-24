@@ -1,11 +1,12 @@
 import React from "react";
-import { violet } from "../../../assets/colors";
+import { paleViolet, violet } from "../../../assets/colors";
 
-export const PledgeProgress = () => {
+export const PledgeProgress = (props) => {
+  const {step}=props
+  console.log(step);
   const circleStyle = {
     width: 40,
     height: 40,
-    background: violet,
     borderRadius: "50%",
     lineHeight: 2,
     textAlign: "center",
@@ -26,13 +27,13 @@ export const PledgeProgress = () => {
       />
 
       <div className="row m-0 justify-content-between">
-        <div className="col-4" style={circleStyle}>
+        <div className="col-4" style={{...circleStyle,background:step===1?violet:paleViolet}}>
           1
         </div>
-        <div className="col-4" style={circleStyle}>
+        <div className="col-4" style={{...circleStyle,background:step===2?violet:paleViolet}}>
           2
         </div>
-        <div className="col-4" style={circleStyle}>
+        <div className="col-4" style={{...circleStyle,background:step===3?violet:paleViolet}}>
           3
         </div>
       </div>

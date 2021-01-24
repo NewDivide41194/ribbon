@@ -71,8 +71,8 @@ const HomeTitle = (props) => {
     <div
       style={{
         position: "absolute",
-        paddingTop: media.tablet?"8rem":"11.5rem",
-        paddingLeft: media.tablet?"8rem":"11.5rem",
+        paddingTop: media.tablet ? "8rem" : "11.5rem",
+        paddingLeft: media.tablet ? "8rem" : "11.5rem",
       }}
       className="text-light col-6"
     >
