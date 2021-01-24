@@ -55,7 +55,7 @@ body {
 }
 
 // non-responsive message
-@media all and (max-width: 550px) {
+@media all and (max-width: 200px) {
 	body:before {
 		content: "Unfortunately, this pen is not completely responsive and is still a work in progress. For the full effect, please view this pen on a screen 550px or wider.";
 		display: block;

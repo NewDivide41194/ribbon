@@ -1,28 +1,34 @@
 import "./App.css";
-import React from 'react'
-import NavBar  from "./app/navBar";
+import React from "react";
+import NavBar from "./app/navBar";
 import { Footer } from "./app/footer";
 
-import { Route, Switch, Redirect,withRouter } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { MediaQueryProvider } from "react-media-query-hoc";
+
 import Routes from "./routes";
 import ErrorPage from "./pages/Error/errors";
 import HomeContainer from "./pages/Home/container/homeContainer";
 
 function App() {
+  const Media = {
+    mobile: "screen and  (max-width:766px)",
+    tablet: "screen and (min-width:768px) and (max-width: 1100px)",
+    desktop: "screen and (min-width:768px) and (max-width: 1441px)",
+  };
+
   return (
-    <React.Fragment>
+    <MediaQueryProvider queries={Media}>
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomeContainer} />
-        {
-          Object.keys(Routes.routes).map((v, k) => (
-            <Route
-              key={k}
-              path={`/${v}`}
-              component={Routes.routes[v].component}
-            />
-          ))
-        }
+        {Object.keys(Routes.routes).map((v, k) => (
+          <Route
+            key={k}
+            path={`/${v}`}
+            component={Routes.routes[v].component}
+          />
+        ))}
         {/* <Redirect to="/" /> */}
 
         <Route
@@ -30,9 +36,9 @@ function App() {
           component={() => <ErrorPage ErrorInfo={"Page Not Found!"} />}
         />
       </Switch>
-      <Footer/>
-    </React.Fragment>
+      <Footer />
+    </MediaQueryProvider>
   );
 }
 
-export default App;
+export default withRouter(App);

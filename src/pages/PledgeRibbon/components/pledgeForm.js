@@ -5,7 +5,8 @@ import { NCIS_Button } from "../../../tools/NCIS_Button";
 import RibbonImages from "../../../assets/RibbonImages.json";
 import { violet } from "../../../assets/colors";
 
-export const PledgeForm = () => {
+export const PledgeForm = (props) => {
+  const { _handleSelect, menuVisible,_handleRibbonClick } = props;
   return (
     <div className="py-5">
       <form>
@@ -15,7 +16,7 @@ export const PledgeForm = () => {
         <label style={{ fontWeight: "bold", fontSize: 25 }}>
           Choose Your Ribbon and Create Your Message
         </label>
-        <PledgeRibbons />
+        <PledgeRibbons _handleSelect={_handleSelect} _handleRibbonClick={_handleRibbonClick} menuVisible={menuVisible}/>
         <div className="form-group row m-0 justify-content-center py-4">
           <div className="col-6">
             <NCIS_TextBox placeHolder={"Add Recipient Name"} />
@@ -24,16 +25,21 @@ export const PledgeForm = () => {
             <NCIS_TextBox placeHolder={"Add Sender Name"} />
           </div>
           <div className="col-12 py-4">
-            <NCIS_Selector placeHolder={"Select Message"} />
+            <NCIS_Selector
+              placeHolder={"Select Message"}
+              onClick={_handleSelect}
+              menuVisible={menuVisible}
+            />
           </div>
-          <NCIS_Button text={"Review"} />
+          {menuVisible||<NCIS_Button text={"Review"} />}
         </div>
       </form>
     </div>
   );
 };
 
-const PledgeRibbons = () => {
+const PledgeRibbons = (props) => {
+  const {_handleRibbonClick,menuVisible}=props
   const [selected, setSelected] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -42,11 +48,7 @@ const PledgeRibbons = () => {
   const prevRibbonDiv = (e) => document.getElementById(e);
 
   const prevSelectedRef = useRef();
-  // useEffect(() => {
-  //   prevSelectedRef.current = selectedId;
-  // });
-  const prevSelectedId = prevSelectedRef.current;
-  console.log("---->", selected);
+
   const _handleClick = (e) => {
     prevSelectedRef.current = selectedId;
     const prevSelectedId = prevSelectedRef.current;
@@ -58,9 +60,12 @@ const PledgeRibbons = () => {
     RibbonDiv(e).style.color = "#ffffff";
     if (selectedId != null) {
       prevRibbonDiv(prevSelectedId).style.background = "none";
-      prevRibbonDiv(prevSelectedId).style.color = "#000000";
+      prevRibbonDiv(prevSelectedId).style.color = "#000000";   
+      _handleRibbonClick(false)   
+
     }
     PopupDiv(e).style.visibility = "hidden";
+    _handleRibbonClick(true)
   };
 
   const _handleHover = (e) => {
@@ -89,7 +94,7 @@ const PledgeRibbons = () => {
   return (
     <div className="d-flex fled-row flex-wrap">
       {RibbonImages.Ribbons.map((v, k) => (
-        <div className="w-25  py-1">
+        <div className="w-25  py-1" style={{ cursor: "pointer" }}>
           <div
             id={k}
             style={{ borderRadius: "50px" }}

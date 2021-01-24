@@ -18,3 +18,29 @@ br {
   line-height: 22px;
   content: " ";
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.level_1 > li {
+  float: left;
+  width: 45%;
+  background-color: #2FA4CF;
+  margin-right: 6px;
+  position:relative;
+}
+.level_1 > li:hover ul {
+  display: block;
+}
+.level_2 {
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+
+.level_2 li {
+  background-color: #535B68;
+  
+}

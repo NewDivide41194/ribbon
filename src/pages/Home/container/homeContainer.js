@@ -1,12 +1,13 @@
 import React from "react";
-import { Home } from "../components/home";
+import { withMedia } from "react-media-query-hoc";
+import Home from "../components/home";
 
-const HomeContainer = () => {
+const HomeContainer = ({media,...props}) => {
   return (
     <div className="container-0">
-      <Home/>
+      <Home media={media}/>
 
     </div>
   )}
 
-  export default HomeContainer
+  export default withMedia(HomeContainer)
