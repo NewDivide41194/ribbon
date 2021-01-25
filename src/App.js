@@ -14,7 +14,7 @@ function App() {
   const Media = {
     mobile: "screen and  (max-width:766px)",
     tablet: "screen and (min-width:768px) and (max-width: 1100px)",
-    desktop: "screen and (min-width:768px) and (max-width: 1441px)",
+    desktop: "screen and (min-width:768px) and (max-width: 1920px)",
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import Jar from "../../../assets/images/Jar.png";
 import Ribbon from "../../../assets/images/Ribbon.png";
+import TabletRibbonBottle from "../../../assets/images/TabletRibbonBottle.png";
+
 import RibbonBottle from "../../../assets/images/RibbonBottle.png";
 import ButtonRibbon from "../../../assets/images/buttonRibbon.png";
 
@@ -24,28 +26,16 @@ export const Home = (props) => {
         backgroundPosition: media.tablet ? "center" : "none",
       }}
     >
-      {/* <div className="col-5 p-0">
-        <img src={Ribbon} width="500px" />
-      </div>
-      <div className="col-7">
-        <div className="row">
-          <div className="w-50">
-            <img src={Jar} width="500px" />
-          </div>
-          <div className="w-50 text-center">
-            <Counter />
-          </div>
-        </div>
-      </div> */}
       <HomeTitle media={media} />
       {media.tablet ? (
         <div className="col-12 p-0 img-fluid">
           <div className="row">
-            <div className="w-50">
-              <img src={Ribbon} className="img-fluid" />
+            <div className="w-100">
+              <img src={TabletRibbonBottle} className="img-fluid"/>
+              {/* <img src={Ribbon} className="img-fluid" />
             </div>
             <div className="w-50">
-              <img src={Jar} className="img-fluid" />
+              <img src={Jar} className="img-fluid" /> */}
             </div>
           </div>
         </div>
@@ -71,14 +61,14 @@ const HomeTitle = (props) => {
     <div
       style={{
         position: "absolute",
-        paddingTop: media.tablet ? "8rem" : "11.5rem",
-        paddingLeft: media.tablet ? "8rem" : "11.5rem",
+        paddingTop: media.tablet ? "10rem" : "11.5rem",
+        paddingLeft: media.tablet ? "7rem" : "11.5rem",
       }}
-      className="text-light col-6"
+      className="text-light col-lg-6 col-md-8"
     >
       <span
         style={{
-          fontSize: media.tablet || media.mobile ? 20 : 30,
+          fontSize: media.tablet ? 20 : 30,
           fontWeight: "bold",
           lineHeight: 1,
         }}
@@ -87,7 +77,7 @@ const HomeTitle = (props) => {
       </span>
       <div
         style={{
-          fontSize: media.tablet || media.mobile ? 45 : 58,
+          fontSize: media.tablet? 35 : 58,
           fontWeight: "bold",
           color: paleViolet,
           lineHeight: 1,
@@ -97,7 +87,7 @@ const HomeTitle = (props) => {
       </div>
       <div
         style={{
-          fontSize: media.tablet || media.mobile ? 45 : 58,
+          fontSize: media.tablet  ? 35 : 58,
           fontWeight: "bold",
           paddingBottom: "100px",
           lineHeight: 1,
